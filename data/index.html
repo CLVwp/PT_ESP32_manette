@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LiDAR LD06</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>LiDAR LD06 - Radar en Temps Réel</h1>
+
+      <div class="card">
+        <h3>Statut du Système</h3>
+        <div class="status-grid">
+          <div class="status-item">
+            <span class="label">LiDAR:</span>
+            <span id="lidarStatus" class="value">Déconnecté</span>
+          </div>
+          <div class="status-item">
+            <span class="label">Distance:</span>
+            <span id="distanceValue" class="value">0 mm</span>
+          </div>
+          <div class="status-item">
+            <span class="label">Points valides:</span>
+            <span id="pointsValue" class="value">0</span>
+          </div>
+          <div class="status-item">
+            <span class="label">Distance max:</span>
+            <span id="maxDistanceValue" class="value">0 mm</span>
+          </div>
+        </div>
+        <button onclick="location.reload()" class="btn">Actualiser</button>
+      </div>
+
+      <div class="card">
+        <h3>Contrôles Radar</h3>
+        <div class="controls-grid">
+          <div>
+            <label>Distance max (m):</label><br />
+            <input
+              type="range"
+              id="maxDistance"
+              min="1"
+              max="12"
+              value="12"
+              step="0.5"
+              style="width: 100%"
+            />
+            <span id="maxDistValue">12m</span>
+          </div>
+          <div>
+            <label>Vitesse actualisation (ms):</label><br />
+            <input
+              type="range"
+              id="updateSpeed"
+              min="100"
+              max="1000"
+              value="200"
+              style="width: 100%"
+            />
+            <span id="speedValue">200ms</span>
+          </div>
+          <div>
+            <label>Persistance points (ms):</label><br />
+            <input
+              type="range"
+              id="persistence"
+              min="100"
+              max="2000"
+              value="500"
+              style="width: 100%"
+            />
+            <span id="persistValue">500ms</span>
+          </div>
+          <div>
+            <label>Taille points:</label><br />
+            <input
+              type="range"
+              id="pointSize"
+              min="1"
+              max="8"
+              value="2"
+              style="width: 100%"
+            />
+            <span id="sizeValue">2px</span>
+          </div>
+          <div>
+            <label>Filtre min (mm):</label><br />
+            <input
+              type="number"
+              id="minDist"
+              value="50"
+              min="0"
+              max="1000"
+              style="width: 100%"
+            />
+          </div>
+          <div>
+            <label>Filtre max (mm):</label><br />
+            <input
+              type="number"
+              id="maxDist"
+              value="12000"
+              min="1000"
+              max="12000"
+              style="width: 100%"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>
+          Radar LiDAR LD06
+          <span id="rpmDisplay" style="color: #666; font-size: 14px"></span>
+        </h3>
+        <div style="text-align: center">
+          <canvas
+            id="radar"
+            width="500"
+            height="500"
+            style="border: 2px solid #333; background: #000"
+          ></canvas>
+          <br /><br />
+          <div id="radarInfo" style="font-size: 16px; color: #666">
+            Chargement...
+          </div>
+        </div>
+      </div>
+
+      <!-- Contrôles de commande -->
+      <div class="card">
+        <h3>Contrôles de commande</h3>
+        <div class="button-grid">
+          <button id="btn-avance" class="cmd-btn" data-cmd="0">
+            ⬆️ AVANCE
+          </button>
+          <button id="btn-gauche" class="cmd-btn" data-cmd="2">
+            ⬅️ GAUCHE
+          </button>
+          <button id="btn-droite" class="cmd-btn" data-cmd="3">
+            ➡️ DROITE
+          </button>
+          <button id="btn-recul" class="cmd-btn" data-cmd="1">⬇️ RECUL</button>
+        </div>
+        <div class="status-display">
+          <p>Commande actuelle: <span id="current-command">0 (AVANCE)</span></p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Instructions:</h3>
+        <p>1. Vérifiez que le LiDAR est alimenté (LED bleue qui tourne)</p>
+        <p>2. Cliquez sur 'Actualiser' pour mettre à jour les données</p>
+        <p>3. Le radar se met à jour automatiquement</p>
+      </div>
+    </div>
+
+    <script src="/script.js"></script>
+  </body>
+</html>
